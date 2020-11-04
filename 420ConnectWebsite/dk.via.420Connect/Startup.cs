@@ -28,7 +28,6 @@ namespace FourTwentyWebsite
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddScoped<IVendorService, VendorService>();
         }
 
