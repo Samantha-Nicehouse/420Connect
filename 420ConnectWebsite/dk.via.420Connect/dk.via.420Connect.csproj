@@ -2,11 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>FourTwentyWebsite</RootNamespace>
+        <RootNamespace>dk.via.420Connect</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="Model\Authorization" />
     </ItemGroup>
-
 </Project>

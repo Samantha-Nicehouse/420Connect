@@ -1,8 +1,23 @@
 ﻿@inherits LayoutComponentBase
-<!--<PreLoaders/>-->
+@if (renderPreLoaders)
+{
+    <PreLoaders />
+}
+else
+{
 <NavBar />
 <div class="main">
     <div class="content px-4">
         @Body
     </div>
 </div>
+}
+@code{
+    private bool renderPreLoaders = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1500);
+        renderPreLoaders = false;
+    }
+}

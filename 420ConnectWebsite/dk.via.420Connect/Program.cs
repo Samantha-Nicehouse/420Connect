@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace FourTwentyWebsite
+namespace dk.via._420Connect
 {
     public class Program
     {
