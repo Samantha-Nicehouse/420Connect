@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FourTwentyWebsite.Data;
 
-namespace FourTwentyWebsite
+namespace dk.via._420Connect
 {
     public class Startup
     {
