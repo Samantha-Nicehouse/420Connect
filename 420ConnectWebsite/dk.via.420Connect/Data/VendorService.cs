@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using FourTwentyWebsite.Model;
+using dk.via._420Connect.Model;
 
-namespace FourTwentyWebsite.Data
+namespace dk.via._420Connect.Data
 {
     public class VendorService : IVendorService
     {

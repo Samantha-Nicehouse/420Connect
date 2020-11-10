@@ -4,9 +4,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-container">
-                        <h1>MARIJUANA <span id="js-rotating">SALES, SERVICES, SOLUTIONS</span></h1>
-                        <p class="p-heading p-large">420Connect is a top consultancy company specializing in marijuana business growth using online marketing and conversion optimization tactics</p>
-                        <a class="btn-solid-lg page-scroll" href="#intro">DISCOVER</a>
+                        <h1>@header1 <span id="js-rotating">@header1sub</span></h1>
+                        <p class="p-heading p-large">@headertext</p>
+                        <a class="btn-solid-lg page-scroll" href="@headerlink">@headerlinktext</a>
                     </div>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -14,5 +14,14 @@
     </div> <!-- end of header-content -->
 </header> <!-- end of header -->
 @code {
-
+    [Parameter]
+    public string header1 { get; set; } = "MARIJUANA";
+    [Parameter]
+    public string header1sub { get; set; } = "SALES, SERVICES, SOLUTIONS";
+    [Parameter]
+    public string headertext { get; set; } = "420Connect is a company specializing in marijuana business growth using online marketing and conversion optimization tactics..";
+    [Parameter]
+    public string headerlink { get; set; } = "#intro";
+    [Parameter]
+    public string headerlinktext { get; set; } = "DISCOVER";
 }

@@ -1,0 +1,67 @@
+﻿@page "/VendorRegistration"
+@using dk.via._420Connect.Model;
+@using dk.via._420Connect.Data;
+
+@inject IVendorService VendorService
+@inject NavigationManager NavigationManager
+<Header header1="Vendor" header1sub="Registration" headertext="Register to access our system here" />
+<h3>Vendor Registration</h3>
+
+        <h3>Registration</h3>
+
+        <EditForm Model="@newVendor" OnValidSubmit="@AddNewVendor">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                First Name:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.FirstName" />
+            </div>
+            <div class="form-group">
+                Last Name:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.LastName" />
+            </div>
+            <div class="form-group">
+                Company:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.VendorName" />
+            </div>
+            <div class="form-group">
+                E-Mail:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.Email" />
+            </div>
+            <div class="form-group">
+                Phone Number:<br />
+                <InputNumber rows="1" @bind-Value="newVendor.PhoneNumber" />
+            </div>
+            <div class="form-group">
+                Vendor Licence:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.vendorLicense" />
+            </div>
+            <div class="form-group">
+                Country:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.Country" />
+            </div>
+            <div class="form-group">
+                City:<br />
+                <InputTextArea rows="1" @bind-Value="newVendor.City" />
+            </div>
+            <p class="actions">
+                <button class="btn btn-outline-dark" type="submit">Create</button>
+            </p>
+        </EditForm>
+  
+
+    @code {
+        private readonly Vendor newVendor = new Vendor();
+
+        private async Task AddNewVendor()
+        {
+            await VendorService.AddVendorAsync(newVendor);
+            NavigationManager.NavigateTo("/", true);
+        }
+
+
+
+    }
+
+

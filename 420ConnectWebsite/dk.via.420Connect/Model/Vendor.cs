@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace FourTwentyWebsite.Model
+namespace dk.via._420Connect.Model
 {
     public class Vendor
     
