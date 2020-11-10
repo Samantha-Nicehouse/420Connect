@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
@@ -12,10 +10,13 @@ namespace dk.via._420Connect.Model
     public class Vendor
     
     {
-        
+        [Key]
         [JsonPropertyName("vendorId")]
         public int VendorId { get; set; }
-        
+
+        [JsonPropertyName("vendorBrandId")]
+        public int VendorBrandId { get; set; }
+
         [JsonPropertyName("vendorName")] public string VendorName { get; set; }
 
         [NotNull]
@@ -46,6 +47,19 @@ namespace dk.via._420Connect.Model
         [JsonPropertyName("country")]
         public string Country { get; set; }
         
+        public void Update(Vendor vendorToUpdate)
+        {
+            VendorId = vendorToUpdate.VendorId;
+            VendorBrandId = vendorToUpdate.VendorBrandId;
+            VendorName = vendorToUpdate.VendorName;
+            FirstName = vendorToUpdate.FirstName;
+            LastName = vendorToUpdate.LastName;
+            Email = vendorToUpdate.Email;
+            PhoneNumber = vendorToUpdate.PhoneNumber;
+            vendorLicense = vendorToUpdate.vendorLicense;
+            City = vendorToUpdate.City;
+            Country = vendorToUpdate.Country;
+        }
         
     }
    
@@ -95,6 +109,5 @@ namespace dk.via._420Connect.Model
             }
         }
     }
-
     
 }

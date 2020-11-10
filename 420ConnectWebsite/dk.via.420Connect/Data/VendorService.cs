@@ -1,41 +1,38 @@
-﻿using System;
+﻿using dk.via._420Connect.Model;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using dk.via._420Connect.Model;
 
 namespace dk.via._420Connect.Data
 {
     public class VendorService : IVendorService
     {
-        private string vendorsFile = "vendors.json";
+        private string vendorFile = "vendors.json";
         private IList<Vendor> vendors;
 
         public VendorService()
         {
-            if (!File.Exists(vendorsFile))
+            if (!File.Exists(vendorFile))
             {
                 Seed();
-                WriteVendorsToFile();
+                WriteVendorToFile();
             }
             else
             {
-                var content = File.ReadAllText(vendorsFile);
+                var content = File.ReadAllText(vendorFile);
                 vendors = JsonSerializer.Deserialize<List<Vendor>>(content);
             }
         }
 
-        public async Task<IList<Vendor>> GetVendorsAsync()
-      
+        public async Task<IList<Vendor>> GetVendors()
         {
             List<Vendor> tmp2 = new List<Vendor>(vendors);
             return tmp2;
         }
 
-        public async Task<Vendor> GetVendorById(int id)
+        public async Task<Vendor> GetById(int id)
         {
             List<Vendor> tmp2 = new List<Vendor>(vendors);
             foreach (var item in tmp2)
@@ -55,21 +52,24 @@ namespace dk.via._420Connect.Data
             var max = vendors.Max(vendor => vendor.VendorId);
             vendor.VendorId = ++max;
             vendors.Add(vendor);
-            WriteVendorsToFile();
+            WriteVendorToFile();
         }
-        
-  
 
-        private void vendorFile()
+        public async Task EditVendorAsync(Vendor vendor)
+        {
+            vendor.Update(vendor);
+        }
+
+        private void vendorsFile()
         {
             var productsAsJson = JsonSerializer.Serialize(vendors);
-            File.WriteAllText(vendorsFile, productsAsJson);
+            File.WriteAllText(vendorFile, productsAsJson);
         }
         public async Task RemoveVendorAsync(int Id)
         {
             var toRemove = vendors.First(t => t.VendorId == Id);
-           vendors.Remove(toRemove);
-            vendorFile();
+            vendors.Remove(toRemove);
+            vendorsFile();
         }
         private void Seed()
         {
@@ -78,16 +78,17 @@ namespace dk.via._420Connect.Data
                 new Vendor
 
                 {
-                   
+
                     FirstName= "Yeshua",
                     LastName= "Magana",
                     VendorName= "Black",
                     VendorId= 11111,
+                    VendorBrandId = 1,
                     Email = "snetteshe@gmail.com",
                     PhoneNumber = 111111111,
                     City = "Wilmington",
                     Country = "USA"
-                    
+
                 },
                 new Vendor
                 {
@@ -95,6 +96,7 @@ namespace dk.via._420Connect.Data
                     LastName= "Trump",
                     VendorName= "BigCitySmoke",
                     VendorId= 13434311,
+                    VendorBrandId = 2,
                     Email = "jkklkhihio@gmail.com",
                     PhoneNumber = 1234535,
                     City = "Wilmington",
@@ -105,12 +107,24 @@ namespace dk.via._420Connect.Data
             vendors = ps.ToList();
         }
 
-        private void WriteVendorsToFile()
+        private void WriteVendorToFile()
         {
             var productsAsJson = JsonSerializer.Serialize(vendors);
-            File.WriteAllText(vendorsFile, productsAsJson);
+            File.WriteAllText(vendorFile, productsAsJson);
         }
 
-       
+        public async Task UpdateVendorAsync(Vendor vendorToUpdate)
+        {
+            foreach (var item in vendors)
+            {
+                if (item.VendorId == vendorToUpdate.VendorId)
+                {
+                    item.Update(vendorToUpdate);
+                }
+            }
+            vendorsFile();
+        }
     }
-    }
+
+
+}
