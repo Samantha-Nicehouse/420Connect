@@ -1,13 +1,19 @@
-using dk.via._420Connect.DataServer.Data;
-using dk.via._420Connect.DataServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using dk.via._420Connect.WebApi.Models;
 
-namespace dk.via._420Connect.DataServer
+namespace dk.via._420Connect.WebApi
 {
     public class Startup
     {
@@ -24,7 +30,6 @@ namespace dk.via._420Connect.DataServer
             services.AddDbContext<VendorContext>(opt =>
                opt.UseInMemoryDatabase("Vendors"));
             services.AddControllers();
-            services.AddScoped<IVendorService, CloudVendorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,22 +2,24 @@
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace dk.via._420Connect.Model
+namespace dk.via._420Connect.DataServer.Models
 {
     public class Vendor
-    
+
     {
         [Key]
+        [NotNull]
         [JsonPropertyName("vendorId")]
         public int VendorId { get; set; }
 
+        [NotNull]
         [JsonPropertyName("vendorBrandId")]
         public int VendorBrandId { get; set; }
 
+        [NotNull]
         [JsonPropertyName("vendorName")] public string VendorName { get; set; }
 
         [NotNull]
@@ -27,27 +29,33 @@ namespace dk.via._420Connect.Model
         [NotNull]
         [JsonPropertyName("lastName")]
         public string LastName { get; set; }
-        
+
+        [NotNull]
         [Required]
         [JsonPropertyName("eMail")]
         public string Email { get; set; }
-        
+
+        [NotNull]
         [Required]
         [JsonPropertyName("phoneNumber")]
         public int PhoneNumber { get; set; }
-        
+
+        [NotNull]
         [Required]
         [JsonPropertyName("vendorLicense")]
         public string vendorLicense { get; set; }
-        
+
+        [NotNull]
         [Required]
         [JsonPropertyName("city")]
         public string City { get; set; }
-        
+
+        [NotNull]
         [Required]
         [JsonPropertyName("country")]
         public string Country { get; set; }
-        
+
+
         public void Update(Vendor vendorToUpdate)
         {
             VendorId = vendorToUpdate.VendorId;
@@ -62,52 +70,11 @@ namespace dk.via._420Connect.Model
             Country = vendorToUpdate.Country;
         }
 
-        public byte[] ToBytes()
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                BinaryWriter bw = new BinaryWriter(ms);
-                bw.Write(VendorId);
-                bw.Write(VendorBrandId);
-                bw.Write(VendorName);
-                bw.Write(FirstName);
-                bw.Write(LastName);
-                bw.Write(Email);
-                bw.Write(PhoneNumber);
-                bw.Write(vendorLicense);
-                bw.Write(City);
-                bw.Write(Country);
-
-                return ms.ToArray();
-            }
-        }
-
-        public static Vendor FromBytes(byte[] buffer)
-        {
-            Vendor retVal = new Vendor();
-
-            using (MemoryStream ms = new MemoryStream(buffer))
-            {
-                BinaryReader br = new BinaryReader(ms);
-                retVal.VendorId = br.ReadInt32();
-                retVal.VendorBrandId = br.ReadInt32();
-                retVal.VendorName = br.ReadString();
-                retVal.FirstName = br.ReadString();
-                retVal.LastName = br.ReadString();
-                retVal.Email = br.ReadString();
-                retVal.PhoneNumber = br.ReadInt32();
-                retVal.vendorLicense = br.ReadString();
-                retVal.City = br.ReadString();
-                retVal.Country = br.ReadString();
-            }
-
-            return retVal;
-        }
-
     }
-   
 
-    public class IsValidEmail{
+
+    public class IsValidEmail
+    {
         public static bool EmailCheck(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -152,5 +119,5 @@ namespace dk.via._420Connect.Model
             }
         }
     }
-    
+
 }

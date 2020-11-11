@@ -6,6 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Model\Authorization" />
+      <Compile Remove="Model\Authorization\**" />
+      <Content Remove="Model\Authorization\**" />
+      <EmbeddedResource Remove="Model\Authorization\**" />
+      <None Remove="Model\Authorization\**" />
     </ItemGroup>
 </Project>

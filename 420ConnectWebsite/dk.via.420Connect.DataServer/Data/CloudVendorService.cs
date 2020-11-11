@@ -1,15 +1,15 @@
-﻿using dk.via._420Connect.Model;
+﻿using dk.via._420Connect.DataServer.Models;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace dk.via._420Connect.Data {
+namespace dk.via._420Connect.DataServer.Data {
     public class CloudVendorService : IVendorService
     {
 
-        private string uri1 = "https://localhost:44374/ds";
+        private string uri1 = "https://localhost:44325/api";
         private readonly HttpClient client;
 
         public CloudVendorService()
